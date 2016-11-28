@@ -1,3 +1,4 @@
+
 import java.util.Iterator;
 import java.util.Scanner;
 
@@ -11,6 +12,13 @@ import java.util.Scanner;
  * @author Aléxia Gomes
  */
 public interface Iterador<T> extends Iterator<T> {
+
     void acrescentar(T dado);
+
     ListaEncadeada<T>.No getAtual();
-}
+
+    public boolean existeProximo();
+
+    public void proximo();
+
+}//Fecha classe principal
