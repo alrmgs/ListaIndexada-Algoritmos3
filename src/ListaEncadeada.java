@@ -34,12 +34,33 @@ public class ListaEncadeada<T> implements Iterable<T> {
         tail = novo;
     }
 
-    public Iterador<T> iterator() {
-        return new listaIterador();
+    void empurrarParaFrente(T valor) {
+        No novo = new No(valor);
+
+        if (head == null) {
+            tail = novo;
+        } else {
+            head.anterior = novo;
+            head = novo;
+        }
     }
 
-    void acrescentar(Object data, No atual) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Iterador<T> iterator() {
+        return new listaIterator();
+    }
+
+    void acrescentar(T valor, No paraTras) {
+        No novo = new No(valor);
+        
+        if(tail != null){
+            novo.anterior = tail;
+            tail.proximo = novo;
+        }else{
+            head = novo;
+        }
+        
+        novo.paraTras = paraTras;
+        tail = novo;
     }
 
     protected class No {
@@ -47,6 +68,7 @@ public class ListaEncadeada<T> implements Iterable<T> {
         private T data;
         private No anterior;
         private No proximo;
+        private No paraTras = null;
 
         public No(T valor) {
             data = valor;
@@ -84,10 +106,11 @@ public class ListaEncadeada<T> implements Iterable<T> {
 
     }
 
-    private class listaIterador implements Iterador<T> {
+    private class listaIterator implements Iterador<T> {
 
         private No atual = null;
         private No anterior = null;
+        
 
         public No getAtual() {
             return atual;

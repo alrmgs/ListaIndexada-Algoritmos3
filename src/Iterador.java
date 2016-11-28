@@ -17,8 +17,4 @@ public interface Iterador<T> extends Iterator<T> {
 
     ListaEncadeada<T>.No getAtual();
 
-    public boolean existeProximo();
-
-    public void proximo();
-
 }//Fecha classe principal
