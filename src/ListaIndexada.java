@@ -22,8 +22,9 @@ public class ListaIndexada {
 
         int i = 1;
 
-        while (iterator.existeProximo()) {
-            iterator.proximo();
+       
+        while (iterator.hasNext()) {
+            iterator.next();
 
             if (iterator.getAtual().getData() == lista.getHead().getData() || iterator.getAtual().getData() == lista.getTail().getData() || i % 10 == 0) {
                 indice.acrescentar(iterator.getAtual().getData(), iterator.getAtual());
@@ -38,9 +39,50 @@ public class ListaIndexada {
             iterator.next();
         }
 
-        ListaEncadeada<Object>.No s = null;
+        ListaEncadeada<Object>.No s = procurar(2599);
 
         System.out.println(s.getData());
         System.out.println(s.getProximo() != null ? s.getProximo().getData() : "");
     }
+
+    public static ListaEncadeada<Object>.No procurar(int index) {
+        int numInteraçao = 0;
+
+        Iterador<Object> indexIterador = indice.iterator();
+        ListaEncadeada<Object>.No e = null;
+
+        while (indexIterator.existeProximo()) {
+            indexIterator.proximo();
+
+            numInteraçao++;
+
+            if (index <= (int) indexIterator.getAtual().getData()) {
+                if (index == (int) indexIterator.getAtual().getData()) {
+                    System.out.println("O número de interação foi de: " + numInteraçao);
+
+                    return indexIterator.getAtual().getParaTras();
+                }
+
+                if (indexIterator.getAtual().getAnterior() != null) {
+                    e = indexIterador.getAtual().getAnterior().getParaTras();
+                } else {
+                    e = indexIterador.getAtual().getParaTras();
+                }
+
+                while (index > (int) e.getData()) {
+                    e = e.getNext();
+                    numInteraçao++;
+                }
+                break;
+            }
+        }
+
+        if (e == null) {
+            System.out.println("Não encontrado! ");
+            System.out.println("O número de interação foi de: " + numInteraçao);
+            return e;
+        }
+        return null;
+    }
+
 }//Fecha classe principal

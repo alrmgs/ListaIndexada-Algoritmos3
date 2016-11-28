@@ -51,14 +51,14 @@ public class ListaEncadeada<T> implements Iterable<T> {
 
     void acrescentar(T valor, No paraTras) {
         No novo = new No(valor);
-        
-        if(tail != null){
+
+        if (tail != null) {
             novo.anterior = tail;
             tail.proximo = novo;
-        }else{
+        } else {
             head = novo;
         }
-        
+
         novo.paraTras = paraTras;
         tail = novo;
     }
@@ -98,6 +98,14 @@ public class ListaEncadeada<T> implements Iterable<T> {
             this.proximo = proximo;
         }
 
+        public No getParaTras() {
+            return paraTras;
+        }
+
+        public void setParaTras(No paraTras) {
+            this.paraTras = paraTras;
+        }
+
         public No(T data, No anterior, No proximo) {
             this.data = data;
             this.anterior = anterior;
@@ -110,7 +118,6 @@ public class ListaEncadeada<T> implements Iterable<T> {
 
         private No atual = null;
         private No anterior = null;
-        
 
         public No getAtual() {
             return atual;
@@ -148,6 +155,70 @@ public class ListaEncadeada<T> implements Iterable<T> {
             }
 
             return atual.data;
+        }
+        
+        public void acrescenta(T dado){
+            No no = new No(dado);
+            No proximo = atual.proximo;
+            
+            no.proximo = proximo;
+            no.anterior = atual;
+            
+            atual.proximo = no;
+            
+            if(atual == tail){
+                tail = no;
+            }
+        }
+        
+        public void acrescenta(T dado, No paraTras){
+            No no = new No(dado);
+            No proximo = atual.proximo;
+            
+            no.proximo = proximo;
+            no.anterior = atual;
+            
+            atual.proximo = no;
+            atual.paraTras = paraTras;
+            
+            if(atual == tail){
+                tail = no;
+            }
+        }
+        
+        @Override
+        public void insere(T dado){
+            No no = new No(dado);
+            
+            no.proximo = atual;
+            atual.anterior = no;
+            
+            if(anterior != null){
+                no.anterior = anterior;
+                anterior.proximo = no;
+            }else{
+                head = no;
+            }
+        }
+
+        @Override
+        public void remove() {
+            Iterador.super.remove(); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void acrescentar(T dado) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public boolean hasNext() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public T next() {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         }
 
     }//fecha listaIterador

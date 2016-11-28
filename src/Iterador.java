@@ -14,7 +14,9 @@ import java.util.Scanner;
 public interface Iterador<T> extends Iterator<T> {
 
     void acrescentar(T dado);
-
+    
+    void insere(T dado);
+    
     ListaEncadeada<T>.No getAtual();
 
 }//Fecha classe principal
